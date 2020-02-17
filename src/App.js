@@ -1,40 +1,30 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
-import ProTip from './ProTip';
-import {useDispatch, useSelector} from 'react-redux';
-import {mainAction} from './action/mainAction';
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Route, Switch } from 'react-router' // react-router v4/v5
 
-export default function App(props) {
-  const dispatch = useDispatch()
-  const mainData = useSelector(state => state.main.mainState)
-  React.useEffect(() => {
-    console.log(mainData);
-    dispatch(mainAction())
-  },[mainData])
+export default function App() {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo( 
+    () =>
+      createMuiTheme({
+        palette: {
+          type: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
+
+  let routes = (
+    <Switch>
+      <Route exact path="/" render={() => (<div>Match</div>)} />
+      <Route render={() => (<div>404 Page Not Found</div>)} />
+    </Switch>
+  )
   return (
-    <Container maxWidth="sm">
-      <Box my={4}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Create React App v4-beta example
-        </Typography>
-        <ProTip />
-        <Copyright />
-      </Box>
-    </Container>
+    <ThemeProvider theme={theme}>
+      {routes}
+    </ThemeProvider>
   );
 }
