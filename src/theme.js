@@ -5,10 +5,10 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: '#106cc8',
     },
     secondary: {
-      main: '#19857b',
+      main: '#fff',
     },
     error: {
       main: red.A400,
@@ -17,6 +17,48 @@ const theme = createMuiTheme({
       default: '#fff',
     },
   },
+  overrides: {
+    MuiTypography: {
+      root: {
+        marginTop: '12px',
+        marginBottom: '12px'
+      }
+    },
+    MuiContainer: {
+      root: {
+        marginTop: '32px'
+      }
+    },
+    MuiFormControl: {
+      root: {
+        color: 'white',
+        minWidth: 120,
+        maxWidth: 300,
+      },
+    },
+    MuiFormLabel: {
+      root: {
+        color: 'white',
+      },
+    },
+    MuiInputLabel:{
+      root: {
+        color: 'white !important',
+      }
+    },
+    MuiInput: {
+      root: {
+        color: 'white',
+      },
+      underline: {
+        "&:before": {
+          borderBottom: `1px solid white !important`
+        }
+      }
+    }
+  },
+
+
 });
 
 export default theme;
