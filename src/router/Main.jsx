@@ -15,7 +15,7 @@ export const Main = (props) => {
   React.useEffect(() => {
     console.log(mainData);
     dispatch(mainAction())
-  },[mainData])
+  },[])
   return (
     <>
       <AppBar position="static">
